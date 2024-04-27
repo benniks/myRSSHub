@@ -722,6 +722,26 @@
     "name": "0818 团",
     "url": "0818tuan.com"
   },
+  "0x80": {
+    "routes": {
+      "/blog": {
+        "path": "/blog",
+        "categories": [
+          "blog"
+        ],
+        "example": "/0x80/blog",
+        "url": "0x80.pl/notesen.html",
+        "name": "Articles",
+        "maintainers": [
+          "xnum"
+        ],
+        "location": "index.ts"
+      }
+    },
+    "name": "Wojciech Muła",
+    "url": "0x80.pl",
+    "description": ""
+  },
   "141jav": {
     "routes": {
       "/{.*}?": {
@@ -4164,6 +4184,37 @@
           "kt286"
         ],
         "location": "exchange-repair.ts"
+      },
+      "/podcast/:id": {
+        "path": "/podcast/:id",
+        "categories": [
+          "multimedia"
+        ],
+        "example": "/apple/podcast/id1559695855",
+        "parameters": {
+          "id": "播客id，可以在 Apple 播客app 内分享的播客的 URL 中找到"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "podcasts.apple.com/cn/podcast/:id"
+            ]
+          }
+        ],
+        "name": "播客",
+        "maintainers": [
+          "Acring"
+        ],
+        "url": "https://www.apple.com.cn/apple-podcasts/",
+        "location": "podcast.ts"
       }
     },
     "name": "Apple",
@@ -4830,51 +4881,12 @@
   },
   "baai": {
     "routes": {
-      "/hub/comments": {
-        "path": "/hub/comments",
-        "categories": [
-          "programming"
-        ],
-        "example": "/baai/hub/comments",
-        "parameters": {},
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "radar": [
-          {
-            "source": [
-              "hub.baai.ac.cn/comments",
-              "hub.baai.ac.cn/"
-            ]
-          }
-        ],
-        "name": "智源社区 - 评论",
-        "maintainers": [
-          "TonyRL"
-        ],
-        "url": "hub.baai.ac.cn/comments",
-        "location": "comments.ts"
-      },
       "/hub/events": {
         "path": "/hub/events",
         "categories": [
           "programming"
         ],
         "example": "/baai/hub/events",
-        "parameters": {},
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
         "radar": [
           {
             "source": [
@@ -4890,34 +4902,31 @@
         "url": "hub.baai.ac.cn/events",
         "location": "events.ts"
       },
-      "/hub/:tagId/:sort?/:range?": {
+      "/hub/:tagId?/:sort?/:range?": {
         "path": [
-          "/hub/:tagId/:sort?/:range?",
-          "/hub/:tagId/:sort?",
-          "/hub/:sort?"
+          "/hub/:tagId?/:sort?/:range?"
         ],
-        "name": "Unknown",
-        "maintainers": [],
-        "location": "hub.ts"
-      },
-      "/hub/:tagId/:sort?": {
-        "path": [
-          "/hub/:tagId/:sort?/:range?",
-          "/hub/:tagId/:sort?",
-          "/hub/:sort?"
+        "categories": [
+          "programming"
         ],
-        "name": "Unknown",
-        "maintainers": [],
-        "location": "hub.ts"
-      },
-      "/hub/:sort?": {
-        "path": [
-          "/hub/:tagId/:sort?/:range?",
-          "/hub/:tagId/:sort?",
-          "/hub/:sort?"
+        "example": "/baai/hub",
+        "parameters": {
+          "tagId": "社群 ID，可在 [社群页](https://hub.baai.ac.cn/taglist) 或 URL 中找到",
+          "sort": "排序，见下表，默认为 `new`",
+          "range": "时间跨度，仅在排序 `readCnt` 时有效"
+        },
+        "description": "排序\n\n| 最新 | 最热    |\n| ---- | ------- |\n| new  | readCnt |\n\n时间跨度\n\n| 3 天 | 本周 | 本月 |\n| ---- | ---- | ---- |\n| 3    | 7    | 30   |",
+        "radar": [
+          {
+            "source": [
+              "baai.ac.cn/"
+            ]
+          }
         ],
-        "name": "Unknown",
-        "maintainers": [],
+        "name": "智源社区",
+        "maintainers": [
+          "TonyRL"
+        ],
         "location": "hub.ts"
       }
     },
@@ -8143,6 +8152,123 @@
           "TonyRL"
         ],
         "location": "lib.ts"
+      },
+      "/mba/:category{.+}?": {
+        "path": "/mba/:category{.+}?",
+        "name": "经济与工商管理学院MBA",
+        "url": "mba.bnu.edu.cn",
+        "maintainers": [
+          "nczitzk"
+        ],
+        "example": "/bnu/mba/xwdt",
+        "parameters": {
+          "category": "分类，默认为 xwdt，即新闻聚焦"
+        },
+        "description": ":::tip\n  若订阅 [新闻聚焦](https://mba.bnu.edu.cn/xwdt/index.html)，网址为 `https://mba.bnu.edu.cn/xwdt/index.html`。截取 `https://mba.bnu.edu.cn/` 到末尾 `/index.html` 的部分 `xwdt` 作为参数填入，此时路由为 [`/bnu/mba/xwdt`](https://rsshub.app/bnu/mba/xwdt)。\n  :::\n\n  #### [主页](https://mba.bnu.edu.cn)\n\n  | [新闻聚焦](https://mba.bnu.edu.cn/xwdt/index.html) | [通知公告](https://mba.bnu.edu.cn/tzgg/index.html) | [MBA 系列讲座](https://mba.bnu.edu.cn/mbaxljz/index.html) |\n  | -------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------- |\n  | [xwdt](https://rsshub.app/bnu/mba/xwdt)            | [tzgg](https://rsshub.app/bnu/mba/tzgg)            | [mbaxljz](https://rsshub.app/bnu/mba/mbaxljz)             |\n\n  #### [招生动态](https://mba.bnu.edu.cn/zsdt/zsjz/index.html)\n\n  | [下载专区](https://mba.bnu.edu.cn/zsdt/cjwt/index.html) |\n  | ------------------------------------------------------- |\n  | [zsdt/cjwt](https://rsshub.app/bnu/mba/zsdt/cjwt)       |\n\n  #### [国际视野](https://mba.bnu.edu.cn/gjhz/hwjd/index.html)\n\n  | [海外基地](https://mba.bnu.edu.cn/gjhz/hwjd/index.html) | [学位合作](https://mba.bnu.edu.cn/gjhz/xwhz/index.html) | [长期交换](https://mba.bnu.edu.cn/gjhz/zqjh/index.html) | [短期项目](https://mba.bnu.edu.cn/gjhz/dqxm/index.html) |\n  | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |\n  | [gjhz/hwjd](https://rsshub.app/bnu/mba/gjhz/hwjd)       | [gjhz/xwhz](https://rsshub.app/bnu/mba/gjhz/xwhz)       | [gjhz/zqjh](https://rsshub.app/bnu/mba/gjhz/zqjh)       | [gjhz/dqxm](https://rsshub.app/bnu/mba/gjhz/dqxm)       |\n\n  #### [校园生活](https://mba.bnu.edu.cn/xysh/xszz/index.html)\n\n  | [学生组织](https://mba.bnu.edu.cn/xysh/xszz/index.html) |\n  | ------------------------------------------------------- |\n  | [xysh/xszz](https://rsshub.app/bnu/mba/xysh/xszz)       |\n\n  #### [职业发展](https://mba.bnu.edu.cn/zyfz/xwds/index.html)\n\n  | [校外导师](https://mba.bnu.edu.cn/zyfz/xwds/index.html) | [企业实践](https://mba.bnu.edu.cn/zyfz/zycp/index.html) | [就业创业](https://mba.bnu.edu.cn/zyfz/jycy/index.html) |\n  | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |\n  | [zyfz/xwds](https://rsshub.app/bnu/mba/zyfz/xwds)       | [zyfz/zycp](https://rsshub.app/bnu/mba/zyfz/zycp)       | [zyfz/jycy](https://rsshub.app/bnu/mba/zyfz/jycy)       |\n  ",
+        "categories": [
+          "university"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "mba.bnu.edu.cn/:category?"
+            ]
+          },
+          {
+            "title": "新闻聚焦",
+            "source": [
+              "mba.bnu.edu.cn/xwdt/index.html"
+            ],
+            "target": "/mba/xwdt"
+          },
+          {
+            "title": "通知公告",
+            "source": [
+              "mba.bnu.edu.cn/tzgg/index.html"
+            ],
+            "target": "/mba/tzgg"
+          },
+          {
+            "title": "MBA系列讲座",
+            "source": [
+              "mba.bnu.edu.cn/mbaxljz/index.html"
+            ],
+            "target": "/mba/mbaxljz"
+          },
+          {
+            "title": "招生动态 - 下载专区",
+            "source": [
+              "mba.bnu.edu.cn/zsdt/cjwt/index.html"
+            ],
+            "target": "/mba/zsdt/cjwt"
+          },
+          {
+            "title": "国际视野 - 海外基地",
+            "source": [
+              "mba.bnu.edu.cn/gjhz/hwjd/index.html"
+            ],
+            "target": "/mba/gjhz/hwjd"
+          },
+          {
+            "title": "国际视野 - 学位合作",
+            "source": [
+              "mba.bnu.edu.cn/gjhz/xwhz/index.html"
+            ],
+            "target": "/mba/gjhz/xwhz"
+          },
+          {
+            "title": "国际视野 - 长期交换",
+            "source": [
+              "mba.bnu.edu.cn/gjhz/zqjh/index.html"
+            ],
+            "target": "/mba/gjhz/zqjh"
+          },
+          {
+            "title": "国际视野 - 短期项目",
+            "source": [
+              "mba.bnu.edu.cn/gjhz/dqxm/index.html"
+            ],
+            "target": "/mba/gjhz/dqxm"
+          },
+          {
+            "title": "校园生活 - 学生组织",
+            "source": [
+              "mba.bnu.edu.cn/xysh/xszz/index.html"
+            ],
+            "target": "/mba/xysh/xszz"
+          },
+          {
+            "title": "职业发展 - 校外导师",
+            "source": [
+              "mba.bnu.edu.cn/zyfz/xwds/index.html"
+            ],
+            "target": "/mba/zyfz/xwds"
+          },
+          {
+            "title": "职业发展 - 企业实践",
+            "source": [
+              "mba.bnu.edu.cn/zyfz/zycp/index.html"
+            ],
+            "target": "/mba/zyfz/zycp"
+          },
+          {
+            "title": "职业发展 - 就业创业",
+            "source": [
+              "mba.bnu.edu.cn/zyfz/jycy/index.html"
+            ],
+            "target": "/mba/zyfz/jycy"
+          }
+        ],
+        "location": "mba.ts"
       }
     },
     "name": "北京师范大学",
@@ -8602,6 +8728,37 @@
     },
     "name": "北京邮电大学",
     "url": "bupt.edu.cn"
+  },
+  "byau": {
+    "routes": {
+      "/news/:type_id": {
+        "path": "/news/:type_id",
+        "categories": [
+          "university"
+        ],
+        "example": "/byau/news/3674",
+        "parameters": {
+          "type_id": "栏目类型(从菜单栏获取对应 ID)"
+        },
+        "radar": [
+          {
+            "source": [
+              "xinwen.byau.edu.cn/:type_id/list.htm"
+            ],
+            "target": "/news/:type_id"
+          }
+        ],
+        "name": "新闻网",
+        "maintainers": [
+          "ueiu"
+        ],
+        "url": "xinwen.byau.edu.cn",
+        "description": "| 学校要闻 | 校园动态 |\n  | ---- | ----------- |\n  | 3674 | 3676 |",
+        "location": "xinwen/index.ts"
+      }
+    },
+    "name": "黑龙江八一农垦大学",
+    "url": "byau.edu.cn"
   },
   "byteclicks": {
     "routes": {
@@ -9092,15 +9249,6 @@
           "traditional-media"
         ],
         "example": "/caixin/weekly",
-        "parameters": {},
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
         "radar": [
           {
             "source": [
@@ -12328,6 +12476,46 @@
     "name": "CoinDesk Consensus Magazine",
     "url": "coindesk.com"
   },
+  "colamanga": {
+    "routes": {
+      "/:id": {
+        "path": "/:id",
+        "parameters": {
+          "id": "漫画id"
+        },
+        "name": "Manga",
+        "maintainers": [
+          "machsix"
+        ],
+        "example": "/colamanga/manga-qq978758",
+        "categories": [
+          "anime"
+        ],
+        "radar": [
+          {
+            "source": [
+              "www.colamanga.com/:id/"
+            ],
+            "target": "/:id"
+          }
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": true,
+          "antiCrawler": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "location": "manga.ts"
+      }
+    },
+    "name": "COLAMANGA",
+    "url": "www.colamanga.com",
+    "zh": {
+      "name": "可乐漫画"
+    }
+  },
   "comicat": {
     "routes": {
       "/search/:keyword": {
@@ -12758,6 +12946,204 @@
     },
     "name": "拷贝漫画",
     "url": "copymanga.com"
+  },
+  "cpcaauto": {
+    "routes": {
+      "/news/:type?/:id?": {
+        "path": "/news/:type?/:id?",
+        "name": "文章",
+        "url": "cpcaauto.com",
+        "maintainers": [
+          "nczitzk"
+        ],
+        "example": "/cpcaauto/news/news",
+        "parameters": {
+          "type": "分类，默认为 news，可在对应分类页 URL 中找到",
+          "id": "id，默认为 news，可在对应分类页 URL 中找到"
+        },
+        "description": ":::tip\n  若订阅 [行业新闻 > 国内乘用车](http://cpcaauto.com/news.php?types=news&anid=10)，网址为 `http://cpcaauto.com/news.php?types=news&anid=10`。截取 `types` 和 `anid` 的部分 `` 作为参数填入，此时路由为 [`/cpcaauto/news/news/10`](https://rsshub.app/cpcaauto/news/news/10)。\n  :::\n\n  #### [行业新闻](http://cpcaauto.com/news.php?types=news)\n\n  | [国内乘用车](http://cpcaauto.com/news.php?types=news&anid=10) | [进口及国外乘用车](http://cpcaauto.com/news.php?types=news&anid=64) | [后市场](http://cpcaauto.com/news.php?types=news&anid=44) | [商用车](http://cpcaauto.com/news.php?types=news&anid=62) |\n  | ----------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |\n  | [news/10](https://rsshub.app/cpcaauto/news/news/10)              | [news/64](https://rsshub.app/cpcaauto/news/news/64)                    | [news/44](https://rsshub.app/cpcaauto/news/news/44)          | [news/62](https://rsshub.app/cpcaauto/news/news/62)          |\n\n  #### [车市解读](http://cpcaauto.com/news.php?types=csjd)\n\n  | [周度](http://cpcaauto.com/news.php?types=csjd&anid=128) | [月度](http://cpcaauto.com/news.php?types=csjd&anid=129) | [指数](http://cpcaauto.com/news.php?types=csjd&anid=130) | [预测](http://cpcaauto.com/news.php?types=csjd&anid=131) |\n  | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |\n  | [csjd/128](https://rsshub.app/cpcaauto/news/csjd/128)       | [csjd/129](https://rsshub.app/cpcaauto/news/csjd/129)       | [csjd/130](https://rsshub.app/cpcaauto/news/csjd/130)       | [csjd/131](https://rsshub.app/cpcaauto/news/csjd/131)       |\n\n  #### [发布会报告](http://cpcaauto.com/news.php?types=bgzl)\n\n  | [上海市场上牌数](http://cpcaauto.com/news.php?types=bgzl&anid=119) | [京城车市](http://cpcaauto.com/news.php?types=bgzl&anid=122) | [进口车市场分析](http://cpcaauto.com/news.php?types=bgzl&anid=120) | [二手车市场分析](http://cpcaauto.com/news.php?types=bgzl&anid=121) | [价格指数](http://cpcaauto.com/news.php?types=bgzl&anid=124) |\n  | ---------------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------- |\n  | [bgzl/119](https://rsshub.app/cpcaauto/news/bgzl/119)                 | [bgzl/122](https://rsshub.app/cpcaauto/news/bgzl/122)           | [bgzl/120](https://rsshub.app/cpcaauto/news/bgzl/120)                 | [bgzl/121](https://rsshub.app/cpcaauto/news/bgzl/121)                 | [bgzl/124](https://rsshub.app/cpcaauto/news/bgzl/124)           |\n\n  | [热点评述](http://cpcaauto.com/news.php?types=bgzl&anid=125) | [新能源月报](http://cpcaauto.com/news.php?types=bgzl&anid=126) | [商用车月报](http://cpcaauto.com/news.php?types=bgzl&anid=127) | [政策分析](http://cpcaauto.com/news.php?types=bgzl&anid=123) |\n  | ---------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ---------------------------------------------------------------- |\n  | [bgzl/125](https://rsshub.app/cpcaauto/news/bgzl/125)           | [bgzl/126](https://rsshub.app/cpcaauto/news/bgzl/126)             | [bgzl/127](https://rsshub.app/cpcaauto/news/bgzl/127)             | [bgzl/123](https://rsshub.app/cpcaauto/news/bgzl/123)           |\n\n  #### [经济与政策](http://cpcaauto.com/news.php?types=meeting)\n\n  | [一周经济](http://cpcaauto.com/news.php?types=meeting&anid=46) | [一周政策](http://cpcaauto.com/news.php?types=meeting&anid=47) |\n  | ------------------------------------------------------------------ | ------------------------------------------------------------------ |\n  | [meeting/46](https://rsshub.app/cpcaauto/news/meeting/46)         | [meeting/47](https://rsshub.app/cpcaauto/news/meeting/47)         |\n\n  #### [乘联会论坛](http://cpcaauto.com/news.php?types=yjsy)\n\n  | [论坛文章](http://cpcaauto.com/news.php?types=yjsy&anid=49) | [两会](http://cpcaauto.com/news.php?types=yjsy&anid=111) | [车展看点](http://cpcaauto.com/news.php?types=yjsy&anid=113) |\n  | --------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------- |\n  | [yjsy/49](https://rsshub.app/cpcaauto/news/yjsy/49)            | [yjsy/111](https://rsshub.app/cpcaauto/news/yjsy/111)       | [yjsy/113](https://rsshub.app/cpcaauto/news/yjsy/113)           |\n  ",
+        "categories": [
+          "new-media"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "cpcaauto.com/news.php"
+            ]
+          },
+          {
+            "title": "行业新闻 - 国内乘用车",
+            "source": [
+              "cpcaauto.com/news.php?types=news&anid=10"
+            ],
+            "target": "/news/news/10"
+          },
+          {
+            "title": "行业新闻 - 进口及国外乘用车",
+            "source": [
+              "cpcaauto.com/news.php?types=news&anid=64"
+            ],
+            "target": "/news/news/64"
+          },
+          {
+            "title": "行业新闻 - 后市场",
+            "source": [
+              "cpcaauto.com/news.php?types=news&anid=44"
+            ],
+            "target": "/news/news/44"
+          },
+          {
+            "title": "行业新闻 - 商用车",
+            "source": [
+              "cpcaauto.com/news.php?types=news&anid=62"
+            ],
+            "target": "/news/news/62"
+          },
+          {
+            "title": "车市解读 - 周度",
+            "source": [
+              "cpcaauto.com/news.php?types=csjd&anid=128"
+            ],
+            "target": "/news/csjd/128"
+          },
+          {
+            "title": "车市解读 - 月度",
+            "source": [
+              "cpcaauto.com/news.php?types=csjd&anid=129"
+            ],
+            "target": "/news/csjd/129"
+          },
+          {
+            "title": "车市解读 - 指数",
+            "source": [
+              "cpcaauto.com/news.php?types=csjd&anid=130"
+            ],
+            "target": "/news/csjd/130"
+          },
+          {
+            "title": "车市解读 - 预测",
+            "source": [
+              "cpcaauto.com/news.php?types=csjd&anid=131"
+            ],
+            "target": "/news/csjd/131"
+          },
+          {
+            "title": "发布会报告 - 上海市场上牌数",
+            "source": [
+              "cpcaauto.com/news.php?types=bgzl&anid=119"
+            ],
+            "target": "/news/bgzl/119"
+          },
+          {
+            "title": "发布会报告 - 京城车市",
+            "source": [
+              "cpcaauto.com/news.php?types=bgzl&anid=122"
+            ],
+            "target": "/news/bgzl/122"
+          },
+          {
+            "title": "发布会报告 - 进口车市场分析",
+            "source": [
+              "cpcaauto.com/news.php?types=bgzl&anid=120"
+            ],
+            "target": "/news/bgzl/120"
+          },
+          {
+            "title": "发布会报告 - 二手车市场分析",
+            "source": [
+              "cpcaauto.com/news.php?types=bgzl&anid=121"
+            ],
+            "target": "/news/bgzl/121"
+          },
+          {
+            "title": "发布会报告 - 价格指数",
+            "source": [
+              "cpcaauto.com/news.php?types=bgzl&anid=124"
+            ],
+            "target": "/news/bgzl/124"
+          },
+          {
+            "title": "发布会报告 - 热点评述",
+            "source": [
+              "cpcaauto.com/news.php?types=bgzl&anid=125"
+            ],
+            "target": "/news/bgzl/125"
+          },
+          {
+            "title": "发布会报告 - 新能源月报",
+            "source": [
+              "cpcaauto.com/news.php?types=bgzl&anid=126"
+            ],
+            "target": "/news/bgzl/126"
+          },
+          {
+            "title": "发布会报告 - 商用车月报",
+            "source": [
+              "cpcaauto.com/news.php?types=bgzl&anid=127"
+            ],
+            "target": "/news/bgzl/127"
+          },
+          {
+            "title": "发布会报告 - 政策分析",
+            "source": [
+              "cpcaauto.com/news.php?types=bgzl&anid=123"
+            ],
+            "target": "/news/bgzl/123"
+          },
+          {
+            "title": "经济与政策 - 一周经济",
+            "source": [
+              "cpcaauto.com/news.php?types=meeting&anid=46"
+            ],
+            "target": "/news/meeting/46"
+          },
+          {
+            "title": "经济与政策 - 一周政策",
+            "source": [
+              "cpcaauto.com/news.php?types=meeting&anid=47"
+            ],
+            "target": "/news/meeting/47"
+          },
+          {
+            "title": "乘联会论坛 - 论坛文章",
+            "source": [
+              "cpcaauto.com/news.php?types=yjsy&anid=49"
+            ],
+            "target": "/news/yjsy/49"
+          },
+          {
+            "title": "乘联会论坛 - 两会",
+            "source": [
+              "cpcaauto.com/news.php?types=yjsy&anid=111"
+            ],
+            "target": "/news/yjsy/111"
+          },
+          {
+            "title": "乘联会论坛 - 车展看点",
+            "source": [
+              "cpcaauto.com/news.php?types=yjsy&anid=113"
+            ],
+            "target": "/news/yjsy/113"
+          }
+        ],
+        "location": "index.ts"
+      }
+    },
+    "name": "cpcaauto.com",
+    "url": "中国汽车流通协会汽车市场研究分会",
+    "categories": [
+      "new-media"
+    ],
+    "description": ""
   },
   "cpcey": {
     "routes": {
@@ -14482,6 +14868,66 @@
     },
     "name": "DeepMind",
     "url": "deepmind.com"
+  },
+  "dehenglaw": {
+    "routes": {
+      "/:language?/:category?": {
+        "path": "/:language?/:category?",
+        "name": "德恒探索",
+        "url": "dehenglaw.com",
+        "maintainers": [
+          "nczitzk"
+        ],
+        "example": "/dehenglaw/CN/paper",
+        "parameters": {
+          "language": "语言，默认为中文，即 CN，可在对应分类页 URL 中找到，可选 CN 和 EN",
+          "category": "分类，默认为专业文章，即 paper，可在对应分类页 URL 中找到"
+        },
+        "description": ":::tip\n  若订阅 [专业文章](https://dehenglaw.com/)，网址为 `https://www.dehenglaw.com/CN/paper/0008/000902.aspx`。截取 `https://dehenglaw.com/` 到末尾 `/0008/000902.aspx` 的部分 `CN/paper` 作为参数填入，此时路由为 [`/dehenglaw/CN/paper`](https://rsshub.app/dehenglaw/CN/paper)。\n\n  | 专业文章 | 出版物  | 德恒论坛 |\n  | -------- | ------- | -------- |\n  | paper    | publish | luntan   |\n  :::",
+        "categories": [
+          "new-media"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "title": "专业文章",
+            "source": [
+              "dehenglaw.com/:language/paper/0008/000902.aspx"
+            ],
+            "target": "/:language/paper"
+          },
+          {
+            "title": "出版物",
+            "source": [
+              "dehenglaw.com/:language/publish/0008/000903.aspx"
+            ],
+            "target": "/:language/publish"
+          },
+          {
+            "title": "德恒论坛",
+            "source": [
+              "dehenglaw.com/:language/luntan/0008/000901.aspx"
+            ],
+            "target": "/:language/luntan"
+          }
+        ],
+        "location": "index.ts"
+      }
+    },
+    "name": "德恒律师事务所",
+    "url": "dehenglaw.com",
+    "categories": [
+      "new-media"
+    ],
+    "description": ""
   },
   "deltaio": {
     "routes": {
@@ -17241,6 +17687,27 @@
         "url": "acm.ecnu.edu.cn/contest/",
         "location": "contest.ts"
       },
+      "/jwc": {
+        "path": "/jwc",
+        "categories": [
+          "university"
+        ],
+        "example": "/ecnu/jwc",
+        "radar": [
+          {
+            "source": [
+              "www.jwc.ecnu.edu.cn",
+              "www.ecnu.edu.cn"
+            ],
+            "target": "/tzgg"
+          }
+        ],
+        "name": "教务处通知",
+        "maintainers": [
+          "markbang"
+        ],
+        "location": "jwc.ts"
+      },
       "/yjs": {
         "path": "/yjs",
         "categories": [
@@ -17273,7 +17740,7 @@
       }
     },
     "name": "East China Normal University 华东师范大学",
-    "url": "acm.ecnu.edu.cn"
+    "url": "ecnu.edu.cn"
   },
   "economist": {
     "routes": {
@@ -23832,7 +24299,7 @@
             "target": "/gov/stats/*path"
           }
         ],
-        "description": "::: tip\n    路径处填写对应页面 URL 中 `http://www.stats.gov.cn/` 后的字段。下面是一个例子。\n\n    若订阅 [数据 > 数据解读](http://www.stats.gov.cn/sj/sjjd/) 则将对应页面 URL `http://www.stats.gov.cn/sj/sjjd/` 中 `http://www.stats.gov.cn/` 后的字段 `sj/sjjd` 作为路径填入。此时路由为 [`/gov/stats/sj/sjjd`](https://rsshub.app/gov/stats/sj/sjjd)\n\n    若订阅 [新闻 > 时政要闻 > 中央精神](http://www.stats.gov.cn/xw/szyw/zyjs/) 则将对应页面 URL `http://www.stats.gov.cn/xw/szyw/zyjs/` 中 `http://www.stats.gov.cn/` 后的字段 `xw/szyw/zyjs` 作为路径填入。此时路由为 [`/gov/stats/xw/szyw/zyjs`](https://rsshub.app/gov/stats/xw/szyw/zyjs)\n    :::",
+        "description": "::: tip\n    路径处填写对应页面 URL 中 `http://www.stats.gov.cn/` 后的字段。下面是一个例子。\n\n    若订阅 [数据 > 数据解读](http://www.stats.gov.cn/sj/sjjd/)\n    则将对应页面 URL `http://www.stats.gov.cn/sj/sjjd/` 中 `http://www.stats.gov.cn/` 后的字段 `sj/sjjd` 作为路径填入。\n    此时路由为 [`/gov/stats/sj/sjjd`](https://rsshub.app/gov/stats/sj/sjjd)\n\n    若订阅 [新闻 > 时政要闻 > 中央精神](http://www.stats.gov.cn/xw/szyw/zyjs/)\n    则将对应页面 URL `http://www.stats.gov.cn/xw/szyw/zyjs/` 中 `http://www.stats.gov.cn/`\n    后的字段 `xw/szyw/zyjs` 作为路径填入。此时路由为 [`/gov/stats/xw/szyw/zyjs`](https://rsshub.app/gov/stats/xw/szyw/zyjs)\n    :::",
         "location": "stats/index.ts"
       },
       "/suzhou/doc": {
@@ -24188,10 +24655,38 @@
           "zxx-457"
         ],
         "location": "zhengce/zhengceku.ts"
+      },
+      "/zj/search/:websiteid?/:word/:cateid?": {
+        "path": "/zj/search/:websiteid?/:word/:cateid?",
+        "categories": [
+          "government"
+        ],
+        "example": "/gov/zj/search",
+        "parameters": {
+          "websiteid": "搜索范围-全省、各市各区、详细信息点击源网站https://www.zj.gov.cn/请求中寻找",
+          "word": "搜索关键词-默认：人才",
+          "cateid": "信息分类-默认：658（全部）",
+          "sortType": "排序类型-默认：2（按时间）"
+        },
+        "radar": [
+          {
+            "source": [
+              "search.zj.gov.cn/jsearchfront/search.do"
+            ],
+            "target": "/zj/search/:websiteid?/:word/:cateid?"
+          }
+        ],
+        "name": "浙江省人民政府-全省政府网站统一搜索",
+        "url": "search.zj.gov.cn/jsearchfront/search.do",
+        "maintainers": [
+          "HaoyuLee"
+        ],
+        "description": "\n        | 行政区域         | websiteid |\n        | ------------ | -- |\n        | 宁波市本级     | 330201000000000  |\n\n        | 搜索关键词         | word    |\n\n        | 信息分类         | cateid    |\n\n        | 排序类型         | sortType    |\n        | ------------ | -- |\n        | 按相关度     | 1  |\n        | 按时间     | 2  |\n    ",
+        "location": "zj/search.ts"
       }
     },
     "name": "中国人民银行",
-    "url": "kjt.ah.gov.cn",
+    "url": "pbc.gov.cn",
     "description": "<details>\n  <summary>*业务咨询* 和 *投诉建议* 可用的站点参数</summary>\n\n  | 上海市   | 北京市  | 天津市  | 河北省 |\n  | -------- | ------- | ------- | ------ |\n  | shanghai | beijing | tianjin | hebei  |\n\n  | 山西省 | 内蒙古自治区 | 辽宁省   | 吉林省 |\n  | ------ | ------------ | -------- | ------ |\n  | shanxi | neimenggu    | liaoning | jilin  |\n\n  | 黑龙江省     | 江苏省  | 浙江省   | 安徽省 |\n  | ------------ | ------- | -------- | ------ |\n  | heilongjiang | jiangsu | zhejiang | anhui  |\n\n  | 福建省 | 江西省  | 山东省   | 河南省 |\n  | ------ | ------- | -------- | ------ |\n  | fujian | jiangxi | shandong | henan  |\n\n  | 湖北省 | 湖南省 | 广东省    | 广西壮族自治区 |\n  | ------ | ------ | --------- | -------------- |\n  | hubei  | hunan  | guangdong | guangxi        |\n\n  | 海南省 | 重庆市    | 四川省  | 贵州省  |\n  | ------ | --------- | ------- | ------- |\n  | hainan | chongqing | sichuan | guizhou |\n\n  | 云南省 | 西藏自治区 | 陕西省  | 甘肃省 |\n  | ------ | ---------- | ------- | ------ |\n  | yunnan | xizang     | shaanxi | gansu  |\n\n  | 青海省  | 宁夏回族自治区 | 新疆维吾尔自治区 | 大连市 |\n  | ------- | -------------- | ---------------- | ------ |\n  | qinghai | ningxia        | xinjiang         | dalian |\n\n  | 宁波市 | 厦门市 | 青岛市  | 深圳市   |\n  | ------ | ------ | ------- | -------- |\n  | ningbo | xiamen | qingdao | shenzhen |\n</details>"
   },
   "greasyfork": {
@@ -28575,15 +29070,6 @@
           "journal"
         ],
         "example": "/ieee-security/security-privacy",
-        "parameters": {},
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
         "radar": [
           {
             "source": [
@@ -28603,6 +29089,65 @@
     },
     "name": "IEEE Computer Society",
     "url": "ieee-security.org"
+  },
+  "iehou": {
+    "routes": {
+      "/:category?": {
+        "path": "/:category?",
+        "name": "线报",
+        "url": "iehou.com",
+        "maintainers": [
+          "nczitzk"
+        ],
+        "example": "/iehou",
+        "parameters": {
+          "category": "分类，默认为空，即最新线报，可在对应分类页 URL 中找到"
+        },
+        "description": ":::tip\n  若订阅 [24小时热门线报](https://iehou.com/page-dayhot.htm)，网址为 `https://iehou.com/page-dayhot.htm`。截取 `https://iehou.com/page-` 到末尾 `.htm` 的部分 `dayhot` 作为参数填入，此时路由为 [`/iehou/dayhot`](https://rsshub.app/iehou/dayhot)。\n  :::\n  \n  | [最新线报](https://iehou.com/) | [24 小时热门](https://iehou.com/page-dayhot.htm) | [一周热门](https://iehou.com/page-weekhot.htm) |\n  | ------------------------------ | ------------------------------------------------ | ---------------------------------------------- |\n  | [](https://rsshub.app/iehou)   | [dayhot](https://rsshub.app/iehou/dayhot)        | [weekhot](https://rsshub.app/iehou/weekhot)    |\n  ",
+        "categories": [
+          "new-media"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "title": "最新线报",
+            "source": [
+              "iehou.com"
+            ],
+            "target": "/"
+          },
+          {
+            "title": "24小时热门",
+            "source": [
+              "iehou.com/page-dayhot.htm"
+            ],
+            "target": "/dayhot"
+          },
+          {
+            "title": "一周热门",
+            "source": [
+              "iehou.com/page-weekhot.htm"
+            ],
+            "target": "/weekhot"
+          }
+        ],
+        "location": "index.ts"
+      }
+    },
+    "name": "网猴线报",
+    "url": "iehou.com",
+    "categories": [
+      "new-media"
+    ],
+    "description": ""
   },
   "ielts": {
     "routes": {
@@ -32197,6 +32742,48 @@
     "url": "konghq.com",
     "description": "[Kong](https://konghq.com/) 是一家开源的 API 网关服务商，此处收集其官网的最新博客文章。"
   },
+  "kpmg": {
+    "routes": {
+      "/insights/:lang?": {
+        "path": "/insights/:lang?",
+        "example": "/kpmg/insights",
+        "parameters": {
+          "lang": "Language, either `en` or `zh`"
+        },
+        "radar": [
+          {
+            "source": [
+              "kpmg.com/xx/en/home/insights.html"
+            ],
+            "target": "/insights/en"
+          },
+          {
+            "source": [
+              "kpmg.com/cn/zh/home/insights.html"
+            ],
+            "target": "/insights/zh"
+          }
+        ],
+        "name": "Insights",
+        "maintainers": [
+          "LogicJake"
+        ],
+        "url": "kpmg.com/xx/en/home/insights.html",
+        "zh": {
+          "name": "洞察"
+        },
+        "location": "insights.ts"
+      }
+    },
+    "name": "KPMG",
+    "url": "kpmg.com",
+    "categories": [
+      "other"
+    ],
+    "zh": {
+      "name": "毕马威"
+    }
+  },
   "kuaidi100": {
     "routes": {
       "/track/:number/:id/:phone?": {
@@ -32981,6 +33568,37 @@
     "name": "旅法师营地",
     "url": "www.iyingdi.com"
   },
+  "lianxh": {
+    "routes": {
+      "/:category?": {
+        "path": "/:category?",
+        "example": "/lianxh",
+        "parameters": {
+          "category": "分类 id，可在对应分类页 URL 中找到，默认为 `all`，即全部"
+        },
+        "radar": [
+          {
+            "source": [
+              "www.lianxh.cn/blogs/all.html",
+              "www.lianxh.cn/"
+            ]
+          }
+        ],
+        "name": "精彩资讯",
+        "maintainers": [
+          "nczitzk"
+        ],
+        "url": "www.lianxh.cn/",
+        "description": "| 分类                 | id  |\n -------------------- | --- |\n 全部                 | all |\n Stata 入门           | 16  |\n Stata 教程           | 17  |\n 计量专题             | 18  |\n 内生性 - 因果推断    | 19  |\n 面板数据             | 20  |\n 交乘项 - 调节 - 中介 | 21  |\n 结果输出             | 22  |\n 工具软件             | 23  |\n Stata 绘图           | 24  |\n 数据处理             | 25  |\n Stata 程序           | 26  |\n Probit-Logit         | 27  |\n 时间序列             | 28  |\n 空间计量 - 网络分析  | 29  |\n Markdown-LaTeX       | 30  |\n 论文写作             | 31  |\n 回归分析             | 32  |\n 其它                 | 33  |\n 数据分享             | 34  |\n Stata 资源           | 35  |\n 文本分析 - 爬虫      | 36  |\n Python-R-Matlab      | 37  |\n IV-GMM               | 38  |\n 倍分法 DID           | 39  |\n 断点回归 RDD         | 40  |\n PSM-Matching         | 41  |\n 合成控制法           | 42  |\n Stata 命令           | 43  |\n 专题课程             | 44  |\n 风险管理             | 45  |\n 生存分析             | 46  |\n 机器学习             | 47  |\n 分位数回归           | 48  |\n SFA-DEA - 效率分析   | 49  |\n 答疑 - 板书          | 50  |\n 论文重现             | 51  |\n 最新课程             | 52  |\n 公开课               | 53  |",
+        "location": "index.ts"
+      }
+    },
+    "name": "连享会",
+    "url": "www.lianxh.cn",
+    "categories": [
+      "programming"
+    ]
+  },
   "lifeweek": {
     "routes": {
       "/channel/:id": {
@@ -33433,7 +34051,8 @@
         "name": "Tag",
         "maintainers": [
           "hoilc",
-          "nczitzk"
+          "nczitzk",
+          "LucunJi"
         ],
         "description": "| new  | date | week | month | total |\n  | ---- | ---- | ---- | ----- | ----- |\n  | 最新 | 日榜 | 周榜 | 月榜  | 总榜  |",
         "location": "tag.ts"
@@ -33458,7 +34077,8 @@
         "name": "User",
         "maintainers": [
           "hondajojo",
-          "nczitzk"
+          "nczitzk",
+          "LucunJi"
         ],
         "location": "user.ts"
       }
@@ -40753,6 +41373,31 @@
     "name": "隆众资讯",
     "url": "oilchem.net"
   },
+  "ollama": {
+    "routes": {
+      "/library": {
+        "path": "/library",
+        "categories": [
+          "programming"
+        ],
+        "example": "/ollama/library",
+        "radar": [
+          {
+            "source": [
+              "ollama.com/library"
+            ]
+          }
+        ],
+        "name": "Models",
+        "maintainers": [
+          "Nick22nd"
+        ],
+        "location": "models.ts"
+      }
+    },
+    "name": "Ollama",
+    "url": "ollama.com"
+  },
   "oncc": {
     "routes": {
       "/:language/:channel?": {
@@ -44767,12 +45412,14 @@
           "id": "专辑id, 可在专辑页 URL 中找到"
         },
         "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
           "supportPodcast": true,
-          "supportScihub": false
+          "requireConfig": [
+            {
+              "name": "QINGTING_ID",
+              "optional": true,
+              "description": "用户id， 部分专辑需要会员身份，用户id可以通过从网页端登录蜻蜓fm后使用开发者工具，在控制台中运行JSON.parse(localStorage.getItem(\"user\")).qingting_id获取"
+            }
+          ]
         },
         "radar": [
           {
@@ -46609,6 +47256,36 @@
     },
     "name": "Samsung",
     "url": "research.samsung.com"
+  },
+  "sara": {
+    "routes": {
+      "/:type": {
+        "path": "/:type",
+        "categories": [
+          "government"
+        ],
+        "example": "/sara/announcement",
+        "parameters": {
+          "type": "dynamic | announcement | industry"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "description": "| 协会动态 | 通知公告 |行业动态 |\n    | -------- | ------------ | -------- |\n    | dynamic | announcement | industry |",
+        "name": "新闻资讯",
+        "maintainers": [
+          "HChenZi"
+        ],
+        "location": "index.ts"
+      }
+    },
+    "name": "上海业余无线电协会",
+    "url": "www.sara.org.cn"
   },
   "saraba1st": {
     "routes": {
@@ -49558,15 +50235,6 @@
           "journal"
         ],
         "example": "/sigsac/ccs",
-        "parameters": {},
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
         "radar": [
           {
             "source": [
@@ -49576,7 +50244,9 @@
           }
         ],
         "name": "The ACM Conference on Computer and Communications Security",
-        "maintainers": [],
+        "maintainers": [
+          "ZeddYu"
+        ],
         "url": "sigsac.org/ccs.html",
         "description": "Return results from 2020",
         "location": "ccs.ts"
@@ -51614,7 +52284,7 @@
         "features": {
           "requireConfig": false,
           "requirePuppeteer": false,
-          "antiCrawler": false,
+          "antiCrawler": true,
           "supportBT": false,
           "supportPodcast": false,
           "supportScihub": false
@@ -51623,11 +52293,12 @@
           {
             "source": [
               "jsjxy.stbu.edu.cn/news",
-              "jsjxy.stbu.edu.cn/"
+              "jsjxy.stbu.edu.cn",
+              "stbu.edu.cn"
             ]
           }
         ],
-        "name": "计算机学院通知公告",
+        "name": "计算机学院 - 通知公告",
         "maintainers": [
           "HyperCherry"
         ],
@@ -51637,15 +52308,28 @@
       },
       "/xyxw": {
         "path": "/xyxw",
+        "categories": [
+          "university"
+        ],
+        "example": "/stbu/xyxw",
+        "parameters": {},
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
         "radar": [
           {
             "source": [
               "stbu.edu.cn/html/news/xueyuan",
-              "stbu.edu.cn/"
+              "stbu.edu.cn"
             ]
           }
         ],
-        "name": "Unknown",
+        "name": "学院新闻",
         "maintainers": [
           "HyperCherry"
         ],
@@ -51715,6 +52399,39 @@
   },
   "steam": {
     "routes": {
+      "/appcommunityfeed/:appid/:routeParams?": {
+        "path": "/appcommunityfeed/:appid/:routeParams?",
+        "categories": [
+          "game"
+        ],
+        "example": "/steam/appcommunityfeed/730",
+        "parameters": {
+          "appid": "Steam appid, can be found on the community hub page or store page URL.",
+          "routeParams": "Query parameters."
+        },
+        "radar": [
+          {
+            "title": "Community Hub",
+            "source": [
+              "steamcommunity.com/app/:appid"
+            ],
+            "target": "/appcommunityfeed/:appid"
+          },
+          {
+            "title": "Community Hub",
+            "source": [
+              "store.steampowered.com/app/:appid/*/"
+            ],
+            "target": "/appcommunityfeed/:appid"
+          }
+        ],
+        "description": "Query Parameters:\n\n| Name                   | Type   | Description             |\n| ---------------------- | ------ | ----------------------- |\n| p                      | string | p                       |\n| rgSections[]           | string | rgSections              |\n| filterLanguage         | string | Filter Language         |\n| languageTag            | string | Language Tag            |\n| nMaxInappropriateScore | string | Max Inappropriate Score |\n\nExample:\n- `/appcommunityfeed/730/p=1&rgSections[]=2&rgSections[]=4&filterLanguage=english&languageTag=english&nMaxInappropriateScore=1` for CS2 Screenshot and Artwork contents.\n- `/appcommunityfeed/730/rgSections[]=6` for CS2 Workshop contents only.\n- `/appcommunityfeed/570/rgSections[]=3&rgSections[]=9` for Dota2 Video and Guides contents.\n\n:::tip\nIt can also access community hub contents that require a logged-in account.\n:::\n",
+        "name": "Steam Community Hub Feeds",
+        "maintainers": [
+          "NyaaaDoge"
+        ],
+        "location": "appcommunityfeed.ts"
+      },
       "/search/:params": {
         "path": "/search/:params",
         "categories": [
@@ -53817,8 +54534,8 @@
   },
   "test": {
     "routes": {
-      "/:id": {
-        "path": "/:id",
+      "/:id/:params?": {
+        "path": "/:id/:params?",
         "name": "Unknown",
         "maintainers": [
           "DIYgod",
@@ -56077,6 +56794,11 @@
               "description": "Please see above for details."
             },
             {
+              "name": "TWITTER_AUTHENTICATION_SECRET",
+              "description": "TOTP 2FA secret, please see above for details.",
+              "optional": true
+            },
+            {
               "name": "TWITTER_COOKIE",
               "description": "Please see above for details."
             }
@@ -56106,7 +56828,7 @@
     },
     "name": "Twitter",
     "url": "twitter.com",
-    "description": "Specify options (in the format of query string) in parameter `routeParams` to control some extra features for Tweets\n\n| Key                            | Description                                                                                                                          | Accepts                | Defaults to                               |\n| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------- | ----------------------------------------- |\n| `readable`                     | Enable readable layout                                                                                                               | `0`/`1`/`true`/`false` | `false`                                   |\n| `authorNameBold`               | Display author name in bold                                                                                                          | `0`/`1`/`true`/`false` | `false`                                   |\n| `showAuthorInTitle`            | Show author name in title                                                                                                            | `0`/`1`/`true`/`false` | `false` (`true` in `/twitter/followings`) |\n| `showAuthorInDesc`             | Show author name in description (RSS body)                                                                                           | `0`/`1`/`true`/`false` | `false` (`true` in `/twitter/followings`) |\n| `showQuotedAuthorAvatarInDesc` | Show avatar of quoted Tweet's author in description (RSS body) (Not recommended if your RSS reader extracts images from description) | `0`/`1`/`true`/`false` | `false`                                   |\n| `showAuthorAvatarInDesc`       | Show avatar of author in description (RSS body) (Not recommended if your RSS reader extracts images from description)                | `0`/`1`/`true`/`false` | `false`                                   |\n| `showEmojiForRetweetAndReply`  | Use \"🔁\" instead of \"RT\", \"↩️\" & \"💬\" instead of \"Re\"                                                                                | `0`/`1`/`true`/`false` | `false`                                   |\n| `showSymbolForRetweetAndReply` | Use \" RT \" instead of \"\", \" Re \" instead of \"\"                                                                                       | `0`/`1`/`true`/`false` | `true`                                    |\n| `showRetweetTextInTitle`       | Show quote comments in title (if `false`, only the retweeted tweet will be shown in the title)                                       | `0`/`1`/`true`/`false` | `true`                                    |\n| `addLinkForPics`               | Add clickable links for Tweet pictures                                                                                               | `0`/`1`/`true`/`false` | `false`                                   |\n| `showTimestampInDescription`   | Show timestamp in description                                                                                                        | `0`/`1`/`true`/`false` | `false`                                   |\n| `showQuotedInTitle`            | Show quoted tweet in title                                                                                                           | `0`/`1`/`true`/`false` | `false`                                   |\n| `widthOfPics`                  | Width of Tweet pictures                                                                                                              | Unspecified/Integer    | Unspecified                               |\n| `heightOfPics`                 | Height of Tweet pictures                                                                                                             | Unspecified/Integer    | Unspecified                               |\n| `sizeOfAuthorAvatar`           | Size of author's avatar                                                                                                              | Integer                | `48`                                      |\n| `sizeOfQuotedAuthorAvatar`     | Size of quoted tweet's author's avatar                                                                                               | Integer                | `24`                                      |\n| `excludeReplies`               | Exclude replies, only available in `/twitter/user`                                                                                   | `0`/`1`/`true`/`false` | `false`                                   |\n| `includeRts`                   | Include retweets, only available in `/twitter/user`                                                                                  | `0`/`1`/`true`/`false` | `true`                                    |\n| `forceWebApi`                  | Force using Web API even if Developer API is configured, only available in `/twitter/user` and `/twitter/keyword`                    | `0`/`1`/`true`/`false` | `false`                                   |\n| `count`                        | `count` parameter passed to Twitter API, only available in `/twitter/user`                                                           | Unspecified/Integer    | Unspecified                               |\n\nSpecify different option values than default values to improve readability. The URL\n\n```\nhttps://rsshub.app/twitter/user/durov/readable=1&authorNameBold=1&showAuthorInTitle=1&showAuthorInDesc=1&showQuotedAuthorAvatarInDesc=1&showAuthorAvatarInDesc=1&showEmojiForRetweetAndReply=1&showRetweetTextInTitle=0&addLinkForPics=1&showTimestampInDescription=1&showQuotedInTitle=1&heightOfPics=150\n```\n\ngenerates\n\n<img loading=\"lazy\" src=\"/img/readable-twitter.png\" alt=\"Readable Twitter RSS of Durov\" />\n\nCurrently supports two authentication methods:\n\n- Using TWITTER_COOKIE (recommended): Configure the cookies of logged-in Twitter Web, at least including the fields auth_token and ct0. RSSHub will use this information to directly access Twitter's web API to obtain data.\n\n- Using TWITTER_USERNAME TWITTER_PASSWORD: Configure the Twitter username and password. RSSHub will use this information to log in to Twitter and obtain data using the mobile API. Please note that if you have not logged in with the current IP address before, it is easy to trigger Twitter's risk control mechanism.\n"
+    "description": "Specify options (in the format of query string) in parameter `routeParams` to control some extra features for Tweets\n\n| Key                            | Description                                                                                                                          | Accepts                | Defaults to                               |\n| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------- | ----------------------------------------- |\n| `readable`                     | Enable readable layout                                                                                                               | `0`/`1`/`true`/`false` | `false`                                   |\n| `authorNameBold`               | Display author name in bold                                                                                                          | `0`/`1`/`true`/`false` | `false`                                   |\n| `showAuthorInTitle`            | Show author name in title                                                                                                            | `0`/`1`/`true`/`false` | `false` (`true` in `/twitter/followings`) |\n| `showAuthorInDesc`             | Show author name in description (RSS body)                                                                                           | `0`/`1`/`true`/`false` | `false` (`true` in `/twitter/followings`) |\n| `showQuotedAuthorAvatarInDesc` | Show avatar of quoted Tweet's author in description (RSS body) (Not recommended if your RSS reader extracts images from description) | `0`/`1`/`true`/`false` | `false`                                   |\n| `showAuthorAvatarInDesc`       | Show avatar of author in description (RSS body) (Not recommended if your RSS reader extracts images from description)                | `0`/`1`/`true`/`false` | `false`                                   |\n| `showEmojiForRetweetAndReply`  | Use \"🔁\" instead of \"RT\", \"↩️\" & \"💬\" instead of \"Re\"                                                                                | `0`/`1`/`true`/`false` | `false`                                   |\n| `showSymbolForRetweetAndReply` | Use \" RT \" instead of \"\", \" Re \" instead of \"\"                                                                                       | `0`/`1`/`true`/`false` | `true`                                    |\n| `showRetweetTextInTitle`       | Show quote comments in title (if `false`, only the retweeted tweet will be shown in the title)                                       | `0`/`1`/`true`/`false` | `true`                                    |\n| `addLinkForPics`               | Add clickable links for Tweet pictures                                                                                               | `0`/`1`/`true`/`false` | `false`                                   |\n| `showTimestampInDescription`   | Show timestamp in description                                                                                                        | `0`/`1`/`true`/`false` | `false`                                   |\n| `showQuotedInTitle`            | Show quoted tweet in title                                                                                                           | `0`/`1`/`true`/`false` | `false`                                   |\n| `widthOfPics`                  | Width of Tweet pictures                                                                                                              | Unspecified/Integer    | Unspecified                               |\n| `heightOfPics`                 | Height of Tweet pictures                                                                                                             | Unspecified/Integer    | Unspecified                               |\n| `sizeOfAuthorAvatar`           | Size of author's avatar                                                                                                              | Integer                | `48`                                      |\n| `sizeOfQuotedAuthorAvatar`     | Size of quoted tweet's author's avatar                                                                                               | Integer                | `24`                                      |\n| `excludeReplies`               | Exclude replies, only available in `/twitter/user`                                                                                   | `0`/`1`/`true`/`false` | `false`                                   |\n| `includeRts`                   | Include retweets, only available in `/twitter/user`                                                                                  | `0`/`1`/`true`/`false` | `true`                                    |\n| `forceWebApi`                  | Force using Web API even if Developer API is configured, only available in `/twitter/user` and `/twitter/keyword`                    | `0`/`1`/`true`/`false` | `false`                                   |\n| `count`                        | `count` parameter passed to Twitter API, only available in `/twitter/user`                                                           | Unspecified/Integer    | Unspecified                               |\n\nSpecify different option values than default values to improve readability. The URL\n\n```\nhttps://rsshub.app/twitter/user/durov/readable=1&authorNameBold=1&showAuthorInTitle=1&showAuthorInDesc=1&showQuotedAuthorAvatarInDesc=1&showAuthorAvatarInDesc=1&showEmojiForRetweetAndReply=1&showRetweetTextInTitle=0&addLinkForPics=1&showTimestampInDescription=1&showQuotedInTitle=1&heightOfPics=150\n```\n\ngenerates\n\n<img loading=\"lazy\" src=\"/img/readable-twitter.png\" alt=\"Readable Twitter RSS of Durov\" />\n\nCurrently supports two authentication methods:\n\n- Using `TWITTER_COOKIE` (recommended): Configure the cookies of logged-in Twitter Web, at least including the fields auth_token and ct0. RSSHub will use this information to directly access Twitter's web API to obtain data.\n\n- Using `TWITTER_USERNAME` `TWITTER_PASSWORD` and `TWITTER_AUTHENTICATION_SECRET`: Configure the Twitter username and password. RSSHub will use this information to log in to Twitter and obtain data using the mobile API. Please note that if you have not logged in with the current IP address before, it is easy to trigger Twitter's risk control mechanism.\n"
   },
   "twreporter": {
     "routes": {
@@ -56304,7 +57026,7 @@
         "categories": [
           "multimedia"
         ],
-        "example": "/u9a9/search/新片速递",
+        "example": "/u3c3/search/新片速递",
         "parameters": {
           "keyword": "Search keyword",
           "preview": "Show image preview, off by default, non empty value means on"
@@ -56331,7 +57053,7 @@
         "categories": [
           "multimedia"
         ],
-        "example": "/u9a9/search/新片速递",
+        "example": "/u3c3/search/新片速递",
         "parameters": {
           "keyword": "Search keyword",
           "preview": "Show image preview, off by default, non empty value means on"
@@ -56351,7 +57073,7 @@
         "location": "index.ts"
       }
     },
-    "name": "U9A9",
+    "name": "U3C3",
     "url": "u3c3.com"
   },
   "u9a9": {
@@ -56361,6 +57083,7 @@
           "/:preview?",
           "/search/:keyword/:preview?"
         ],
+        "example": "/u9a9/search/新片速递",
         "radar": [
           {
             "source": [
@@ -56369,7 +57092,7 @@
             "target": ""
           }
         ],
-        "name": "Unknown",
+        "name": "Search",
         "maintainers": [
           "TonyRL"
         ],
@@ -56381,6 +57104,7 @@
           "/:preview?",
           "/search/:keyword/:preview?"
         ],
+        "example": "/u9a9/search/新片速递",
         "radar": [
           {
             "source": [
@@ -56389,7 +57113,7 @@
             "target": ""
           }
         ],
-        "name": "Unknown",
+        "name": "Search",
         "maintainers": [
           "TonyRL"
         ],
@@ -56397,7 +57121,7 @@
         "location": "index.ts"
       }
     },
-    "name": "Unknown",
+    "name": "U9A9",
     "url": "u9a9.com"
   },
   "uber": {
@@ -57351,15 +58075,6 @@
           "journal"
         ],
         "example": "/usenix/usenix-security-sympoium",
-        "parameters": {},
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
         "radar": [
           {
             "source": [
@@ -65046,6 +65761,74 @@
     },
     "name": "赵容部落",
     "url": "zrblog.net"
+  },
+  "zsxq": {
+    "routes": {
+      "/group/:id/:scope?": {
+        "name": "星球",
+        "categories": [
+          "social-media"
+        ],
+        "path": "/group/:id/:scope?",
+        "example": "/zsxq/group/88855458825252",
+        "parameters": {
+          "id": "星球id，从网页端url中获取",
+          "scope": "栏目分类，默认为\"all\"，见下表"
+        },
+        "maintainers": [
+          "KarasuShin"
+        ],
+        "radar": [
+          {
+            "source": [
+              "wx.zsxq.com/dweb2/index/group/:id"
+            ]
+          }
+        ],
+        "features": {
+          "requireConfig": [
+            {
+              "name": "ZSXQ_ACCESS_TOKEN",
+              "description": "知识星球访问令牌,获取方式：\n1. 登录知识星球网页版\n2. 打开浏览器开发者工具，切换到 Application 面板\n3. 点击侧边栏中的Storage -> Cookies -> https://wx.zsxq.com\n4. 复制 Cookie 中的 zsxq_access_token 值"
+            }
+          ]
+        },
+        "description": "| all  | digests | by_owner | questions | tasks |\n    | ---- | ------ | --------- | -------- | ------ |\n    | 最新 | 精华    | 只看星主    | 问答      | 作业   |",
+        "location": "group.ts"
+      },
+      "/user/:id": {
+        "name": "用户足迹",
+        "categories": [
+          "social-media"
+        ],
+        "path": "/user/:id",
+        "example": "/zsxq/user/2414218251",
+        "parameters": {
+          "id": "用户id，从网页端url中获取"
+        },
+        "maintainers": [
+          "KarasuShin"
+        ],
+        "radar": [
+          {
+            "source": [
+              "wx.zsxq.com/dweb2/index/footprint/:id"
+            ]
+          }
+        ],
+        "features": {
+          "requireConfig": [
+            {
+              "name": "ZSXQ_ACCESS_TOKEN",
+              "description": "知识星球访问令牌,获取方式：\n1. 登录知识星球网页版\n2. 打开浏览器开发者工具，切换到 Application 面板\n3. 点击侧边栏中的Storage -> Cookies -> https://wx.zsxq.com\n4. 复制 Cookie 中的 zsxq_access_token 值"
+            }
+          ]
+        },
+        "location": "user.ts"
+      }
+    },
+    "name": "知识星球",
+    "url": "zsxq.com"
   },
   "zuel": {
     "routes": {
